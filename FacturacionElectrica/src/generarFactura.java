@@ -101,6 +101,12 @@ public class generarFactura extends javax.swing.JDialog {
 
         etiquetaTarifa.setText("Tarifa:");
 
+        entradaCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                entradaCodigoActionPerformed(evt);
+            }
+        });
+
         jLabel1.setText("Total:");
 
         jTextField1.setEditable(false);
@@ -209,6 +215,13 @@ public class generarFactura extends javax.swing.JDialog {
     private void botonEmitirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEmitirActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_botonEmitirActionPerformed
+
+    private void entradaCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entradaCodigoActionPerformed
+        //Realizar consulta que obtenga los datos pertinentes
+        //primero generar un numero de factura nuevo
+        //luego con el codigo de medidor obtener el id del propietario
+        //
+    }//GEN-LAST:event_entradaCodigoActionPerformed
 
     /**
      * @param args the command line arguments
