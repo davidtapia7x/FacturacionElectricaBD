@@ -29,29 +29,29 @@ public class interfazPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        barraMenu = new javax.swing.JMenuBar();
+        menuFacturar = new javax.swing.JMenu();
+        item_GenerarFactura = new javax.swing.JMenuItem();
+        menuAcercaDe = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenu1.setText("Facturar");
+        menuFacturar.setText("Facturar");
 
-        jMenuItem1.setText("Generar Factura");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        item_GenerarFactura.setText("Generar Factura");
+        item_GenerarFactura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                item_GenerarFacturaActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        menuFacturar.add(item_GenerarFactura);
 
-        jMenuBar1.add(jMenu1);
+        barraMenu.add(menuFacturar);
 
-        jMenu2.setText("Acerca de");
-        jMenuBar1.add(jMenu2);
+        menuAcercaDe.setText("Acerca de");
+        barraMenu.add(menuAcercaDe);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(barraMenu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -67,9 +67,9 @@ public class interfazPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void item_GenerarFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_GenerarFacturaActionPerformed
         JOptionPane.showMessageDialog(null,"Hola que tal!");
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_item_GenerarFacturaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -107,9 +107,9 @@ public class interfazPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuBar barraMenu;
+    private javax.swing.JMenuItem item_GenerarFactura;
+    private javax.swing.JMenu menuAcercaDe;
+    private javax.swing.JMenu menuFacturar;
     // End of variables declaration//GEN-END:variables
 }
