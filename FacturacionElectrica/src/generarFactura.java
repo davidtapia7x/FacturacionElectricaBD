@@ -1,3 +1,11 @@
+
+import clases.conexión;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -16,6 +24,20 @@ public class generarFactura extends javax.swing.JDialog {
     public generarFactura(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+    public void cargarTabla2( ArrayList datos)
+    {
+
+        String[] titulos = (String[])datos.get(0);
+       DefaultTableModel modelo = new DefaultTableModel(null, titulos);
+       
+     
+     for(int i=1;i<datos.size();i++)
+     {
+         String registro[]= (String[])datos.get(i);
+        modelo.addRow(registro);
+     }
+      tablaServicio.setModel(modelo);  //Nombre de la tabla    
     }
 
     /**
@@ -216,7 +238,19 @@ public class generarFactura extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonEmitirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEmitirActionPerformed
-        // TODO add your handling code here:
+        conexión prueba = new conexión();
+	try{
+            try {
+                prueba.conectar();
+                ArrayList a = prueba.impresion();
+                cargarTabla2(a);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(conexión.class.getName()).log(Level.SEVERE, null, ex);
+            }
+	}
+	catch(SQLException sqlExepcion){
+		System.out.println(sqlExepcion);
+	}
     }//GEN-LAST:event_botonEmitirActionPerformed
 
     private void entradaCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entradaCodigoActionPerformed

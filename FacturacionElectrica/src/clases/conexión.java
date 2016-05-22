@@ -65,40 +65,46 @@ public class conexión{
 		}
 	}
 	
-        
-	public void impresion() throws SQLException{
-		impresionR = sentencia.executeQuery("SELECT * FROM CALLES");
+	public ArrayList impresion() throws SQLException{
+                sentencia = conexion.createStatement();
+                impresionR = sentencia.executeQuery("SELECT * FROM CALLES");
 		metaData = impresionR.getMetaData();
 		int columnas = metaData.getColumnCount();
-         
-		
                 
-                List<List<Object>> result = new ArrayList<>();  // List of list, one per row
+                //List<List<Object>> result = new ArrayList<>();  // List of list, one per row
+                ArrayList ayuda= new ArrayList(0);
                 
-                List<Object> header = new ArrayList<>(columnas);
+                //List<Object> header = new ArrayList<>(columnas);
+                String[] header= new String[columnas];
+                
                 for(int i =1; i <=columnas;i++ ){
                     System.out.println(metaData.getColumnName(i));
-                    header.add(metaData.getColumnName(i));
+                    header[i-1]=metaData.getColumnName(i);
+                    //header.add(metaData.getColumnName(i));
                 }
-                result.add(header);
+                //result.add(header);
+                ayuda.add(header);
                 while (impresionR.next()) {
-                    List<Object> row = new ArrayList<>(columnas); // new list per row
+                    //List<Object> row = new ArrayList<>(columnas); // new list per row
+                    String[] fila= new String[columnas];
                     int i = 1;
                     while (i <= columnas) {  // don't skip the last column, use <=
-                        row.add(impresionR.getObject(i));
+                        //row.add(impresionR.getObject(i));
+                        fila[i-1]=impresionR.getString(i);
                         System.out.println(impresionR.getObject(i).toString());
                         i++;
                     }
-                    result.add(row); // add it to the result
+                    ayuda.add(fila); // add it to the result
                 }
-            
+                return ayuda;
 	}
 	public static void main(String [] andres){
 	conexión prueba = new conexión();
 	try{
             try {
                 prueba.conectar();
-                prueba.modificaciones();
+                ArrayList a = prueba.impresion();
+                
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(conexión.class.getName()).log(Level.SEVERE, null, ex);
             }
