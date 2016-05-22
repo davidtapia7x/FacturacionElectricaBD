@@ -66,20 +66,25 @@ public class conexión{
 	
         
 	public void impresion() throws SQLException{
-		impresionR = sentencia.executeQuery("SELECT * FROM EMPLEADO");
+		impresionR = sentencia.executeQuery("SELECT * FROM CALLES");
 		metaData = impresionR.getMetaData();
 		int columnas = metaData.getColumnCount();
-                
+         
 		for(int i =1; i <=columnas;i++ ){
                     System.out.println(metaData.getColumnName(i));
                 }
+                
+                Object a[] = new Object[columnas];
+                
 		while(impresionR.next()){
-			
-                    String codc = impresionR.getString("codcalles");
-                    String nombc = impresionR.getString("nombrecalle");
-                    System.out.print(codc);
-                    System.out.print(nombc);
-                    System.out.println("");
+                    for(int i =0; i <columnas;i++ ){
+                        a[i] = impresionR.getObject(i+1);
+                        System.out.println(a[i].toString());
+                    }
+                
+                    //System.out.print(codc);
+                    //System.out.print(nombc);
+                    //System.out.println("");
 		}
 	}
 	public static void main(String [] andres){
