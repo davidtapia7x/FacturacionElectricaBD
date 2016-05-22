@@ -27,7 +27,7 @@ import javax.persistence.Transient;
     @NamedQuery(name = "Calles.findAll", query = "SELECT c FROM Calles c"),
     @NamedQuery(name = "Calles.findByCodcalles", query = "SELECT c FROM Calles c WHERE c.codcalles = :codcalles"),
     @NamedQuery(name = "Calles.findByNombrecalle", query = "SELECT c FROM Calles c WHERE c.nombrecalle = :nombrecalle")})
-public class CallesControll implements Serializable {
+public class Calles implements Serializable {
 
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
@@ -41,14 +41,14 @@ public class CallesControll implements Serializable {
     @Column(name = "NOMBRECALLE")
     private String nombrecalle;
 
-    public CallesControll() {
+    public Calles() {
     }
 
-    public CallesControll(String codcalles) {
+    public Calles(String codcalles) {
         this.codcalles = codcalles;
     }
 
-    public CallesControll(String codcalles, String nombrecalle) {
+    public Calles(String codcalles, String nombrecalle) {
         this.codcalles = codcalles;
         this.nombrecalle = nombrecalle;
     }
@@ -83,10 +83,10 @@ public class CallesControll implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CallesControll)) {
+        if (!(object instanceof Calles)) {
             return false;
         }
-        CallesControll other = (CallesControll) object;
+        Calles other = (Calles) object;
         if ((this.codcalles == null && other.codcalles != null) || (this.codcalles != null && !this.codcalles.equals(other.codcalles))) {
             return false;
         }

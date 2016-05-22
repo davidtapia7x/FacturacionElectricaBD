@@ -186,9 +186,9 @@ public class Calle extends JPanel {
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         int[] selected = masterTable.getSelectedRows();
-        List<masterDetail.CallesControll> toRemove = new ArrayList<masterDetail.CallesControll>(selected.length);
+        List<masterDetail.Calles> toRemove = new ArrayList<masterDetail.Calles>(selected.length);
         for (int idx = 0; idx < selected.length; idx++) {
-            masterDetail.CallesControll c = list.get(masterTable.convertRowIndexToModel(selected[idx]));
+            masterDetail.Calles c = list.get(masterTable.convertRowIndexToModel(selected[idx]));
             toRemove.add(c);
             entityManager.remove(c);
         }
@@ -196,7 +196,7 @@ public class Calle extends JPanel {
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
-        masterDetail.CallesControll c = new masterDetail.CallesControll();
+        masterDetail.Calles c = new masterDetail.Calles();
         entityManager.persist(c);
         list.add(c);
         int row = list.size() - 1;
@@ -211,8 +211,8 @@ public class Calle extends JPanel {
         } catch (RollbackException rex) {
             rex.printStackTrace();
             entityManager.getTransaction().begin();
-            List<masterDetail.CallesControll> merged = new ArrayList<masterDetail.CallesControll>(list.size());
-            for (masterDetail.CallesControll c : list) {
+            List<masterDetail.Calles> merged = new ArrayList<masterDetail.Calles>(list.size());
+            for (masterDetail.Calles c : list) {
                 merged.add(entityManager.merge(c));
             }
             list.clear();
@@ -226,7 +226,7 @@ public class Calle extends JPanel {
     private javax.swing.JLabel codcallesLabel;
     private javax.swing.JButton deleteButton;
     private javax.persistence.EntityManager entityManager;
-    private java.util.List<masterDetail.CallesControll> list;
+    private java.util.List<masterDetail.Calles> list;
     private javax.swing.JScrollPane masterScrollPane;
     private javax.swing.JTable masterTable;
     private javax.swing.JButton newButton;
