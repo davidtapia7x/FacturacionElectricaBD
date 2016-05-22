@@ -29,24 +29,114 @@ public class interfazPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
+        logoCentroSur = new javax.swing.JLabel();
         barraMenu = new javax.swing.JMenuBar();
-        menuFacturar = new javax.swing.JMenu();
-        item_GenerarFactura = new javax.swing.JMenuItem();
+        menuFactura = new javax.swing.JMenu();
+        menuFacturaServ = new javax.swing.JMenu();
+        menuConsFacturaServ = new javax.swing.JMenu();
+        item_ConsultaFacServCedula = new javax.swing.JMenuItem();
+        item_ConsultaFacServNumFac = new javax.swing.JMenuItem();
+        item_ConsultaFacServNumMed = new javax.swing.JMenuItem();
+        item_GenerarFacturaServ = new javax.swing.JMenuItem();
+        itemMantenimientoFactServ = new javax.swing.JMenuItem();
+        menuFacturaInst = new javax.swing.JMenu();
+        menuConsFacturaIns = new javax.swing.JMenu();
+        item_ConsultaFacInstCedula = new javax.swing.JMenuItem();
+        item_ConsultaFacInstNumFac = new javax.swing.JMenuItem();
+        item_GenerarFacturaInst = new javax.swing.JMenuItem();
+        itemMantenimientoFactInst = new javax.swing.JMenuItem();
+        menuLectura = new javax.swing.JMenu();
+        menuConsultaLectura = new javax.swing.JMenu();
+        itemCRUDLectura = new javax.swing.JMenuItem();
+        menuParametro = new javax.swing.JMenu();
+        menuConsultaParametro = new javax.swing.JMenu();
+        itemCRUDParametro = new javax.swing.JMenuItem();
         menuAcercaDe = new javax.swing.JMenu();
 
+        jMenuItem1.setText("jMenuItem1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Menu Principal");
 
-        menuFacturar.setText("Facturar");
+        logoCentroSur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/LogoCentroSur.JPG"))); // NOI18N
 
-        item_GenerarFactura.setText("Generar Factura");
-        item_GenerarFactura.addActionListener(new java.awt.event.ActionListener() {
+        menuFactura.setText("Facturas");
+
+        menuFacturaServ.setText("Servicio");
+
+        menuConsFacturaServ.setText("Consultas");
+
+        item_ConsultaFacServCedula.setText("Por cedula");
+        menuConsFacturaServ.add(item_ConsultaFacServCedula);
+
+        item_ConsultaFacServNumFac.setText("Por numero de factura");
+        menuConsFacturaServ.add(item_ConsultaFacServNumFac);
+
+        item_ConsultaFacServNumMed.setText("Por numero de medidor");
+        menuConsFacturaServ.add(item_ConsultaFacServNumMed);
+
+        menuFacturaServ.add(menuConsFacturaServ);
+
+        item_GenerarFacturaServ.setText("Generar Factura");
+        item_GenerarFacturaServ.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                item_GenerarFacturaActionPerformed(evt);
+                item_GenerarFacturaServActionPerformed(evt);
             }
         });
-        menuFacturar.add(item_GenerarFactura);
+        menuFacturaServ.add(item_GenerarFacturaServ);
 
-        barraMenu.add(menuFacturar);
+        itemMantenimientoFactServ.setText("Mantenimiento");
+        menuFacturaServ.add(itemMantenimientoFactServ);
+
+        menuFactura.add(menuFacturaServ);
+
+        menuFacturaInst.setText("Instalacion");
+
+        menuConsFacturaIns.setText("Consultas");
+
+        item_ConsultaFacInstCedula.setText("Por cedula");
+        menuConsFacturaIns.add(item_ConsultaFacInstCedula);
+
+        item_ConsultaFacInstNumFac.setText("Por numero de factura");
+        item_ConsultaFacInstNumFac.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                item_ConsultaFacInstNumFacActionPerformed(evt);
+            }
+        });
+        menuConsFacturaIns.add(item_ConsultaFacInstNumFac);
+
+        menuFacturaInst.add(menuConsFacturaIns);
+
+        item_GenerarFacturaInst.setText("Generar Factura");
+        menuFacturaInst.add(item_GenerarFacturaInst);
+
+        itemMantenimientoFactInst.setText("Mantenimiento");
+        menuFacturaInst.add(itemMantenimientoFactInst);
+
+        menuFactura.add(menuFacturaInst);
+
+        barraMenu.add(menuFactura);
+
+        menuLectura.setText("Lecturas");
+
+        menuConsultaLectura.setText("Consultas");
+        menuLectura.add(menuConsultaLectura);
+
+        itemCRUDLectura.setText("CRUD");
+        menuLectura.add(itemCRUDLectura);
+
+        barraMenu.add(menuLectura);
+
+        menuParametro.setText("Parametros");
+
+        menuConsultaParametro.setText("Consultas");
+        menuParametro.add(menuConsultaParametro);
+
+        itemCRUDParametro.setText("CRUD");
+        menuParametro.add(itemCRUDParametro);
+
+        barraMenu.add(menuParametro);
 
         menuAcercaDe.setText("Acerca de");
         barraMenu.add(menuAcercaDe);
@@ -57,19 +147,23 @@ public class interfazPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(logoCentroSur)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
+            .addComponent(logoCentroSur)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void item_GenerarFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_GenerarFacturaActionPerformed
+    private void item_GenerarFacturaServActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_GenerarFacturaServActionPerformed
         JOptionPane.showMessageDialog(null,"Hola que tal!");
-    }//GEN-LAST:event_item_GenerarFacturaActionPerformed
+    }//GEN-LAST:event_item_GenerarFacturaServActionPerformed
+
+    private void item_ConsultaFacInstNumFacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_ConsultaFacInstNumFacActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_item_ConsultaFacInstNumFacActionPerformed
 
     /**
      * @param args the command line arguments
@@ -108,8 +202,28 @@ public class interfazPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar barraMenu;
-    private javax.swing.JMenuItem item_GenerarFactura;
+    private javax.swing.JMenuItem itemCRUDLectura;
+    private javax.swing.JMenuItem itemCRUDParametro;
+    private javax.swing.JMenuItem itemMantenimientoFactInst;
+    private javax.swing.JMenuItem itemMantenimientoFactServ;
+    private javax.swing.JMenuItem item_ConsultaFacInstCedula;
+    private javax.swing.JMenuItem item_ConsultaFacInstNumFac;
+    private javax.swing.JMenuItem item_ConsultaFacServCedula;
+    private javax.swing.JMenuItem item_ConsultaFacServNumFac;
+    private javax.swing.JMenuItem item_ConsultaFacServNumMed;
+    private javax.swing.JMenuItem item_GenerarFacturaInst;
+    private javax.swing.JMenuItem item_GenerarFacturaServ;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JLabel logoCentroSur;
     private javax.swing.JMenu menuAcercaDe;
-    private javax.swing.JMenu menuFacturar;
+    private javax.swing.JMenu menuConsFacturaIns;
+    private javax.swing.JMenu menuConsFacturaServ;
+    private javax.swing.JMenu menuConsultaLectura;
+    private javax.swing.JMenu menuConsultaParametro;
+    private javax.swing.JMenu menuFactura;
+    private javax.swing.JMenu menuFacturaInst;
+    private javax.swing.JMenu menuFacturaServ;
+    private javax.swing.JMenu menuLectura;
+    private javax.swing.JMenu menuParametro;
     // End of variables declaration//GEN-END:variables
 }
