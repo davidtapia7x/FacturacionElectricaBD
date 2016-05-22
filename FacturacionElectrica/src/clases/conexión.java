@@ -73,16 +73,14 @@ public class conexión{
 		for(int i =1; i <=columnas;i++ ){
                     System.out.println(metaData.getColumnName(i));
                 }
-		/*while(impresionR.next()){
+		while(impresionR.next()){
 			
-                String codc = impresionR.getString("codcalles");
-                String nombc = impresionR.getString("nombrecalle");
-                        
-            	System.out.print(codc);
-            	System.out.print(nombc);
-            
-		System.out.println("");
-		}*/
+                    String codc = impresionR.getString("codcalles");
+                    String nombc = impresionR.getString("nombrecalle");
+                    System.out.print(codc);
+                    System.out.print(nombc);
+                    System.out.println("");
+		}
 	}
 	public static void main(String [] andres){
 	conexión prueba = new conexión();
