@@ -2,6 +2,9 @@ package clases;
 
 import java.sql.*;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class conexión{
 	
 	private Statement sentencia;
@@ -9,39 +12,31 @@ public class conexión{
 	private ResultSet impresionR;
 	private ResultSetMetaData metaData;
 	
-	public void conectar() throws SQLException{
+	public void conectar() throws SQLException, ClassNotFoundException{
 		conexion = null;
-		
-		String bd = "sistema";
-		String user = "andres";
-		String pass = "UD4.10";
-		String url  = "jdbc:mysql://localhost/" + bd;
-		
-		//try{
-			conexion = DriverManager.getConnection(url,user,pass);
-			System.out.println("Conexion exitosa: "+ bd);
-			
-		//}
-		//catch(SQLException sqlExepcion){
-		//System.out.println(sqlExepcion);
-		//}
-		
+		Class.forName ("oracle.jdbc.driver.OracleDriver");
+		String user = "FACTURACIONELECTRICA";
+		String pass = "basededatos2016";
+		String url  = "jdbc:oracle:thin:@localhost:1521:XE";
+		conexion = DriverManager.getConnection(url,user,pass);
+		System.out.println("Conexion exitosa: ");	
+                
 	}
 	
 	public void modificaciones() throws SQLException{ 
 		
 		try{
-		SimpleDateFormat formatoFecha = new SimpleDateFormat("y/MM/d");
-        java.util.Date fecha = new java.util.Date();
-        fecha = formatoFecha.parse("1980/5/18");
-        String fechaN = formatoFecha.format(fecha).toString();
+		/*SimpleDateFormat formatoFecha = new SimpleDateFormat("y/MM/d");
+                java.util.Date fecha = new java.util.Date();
+                fecha = formatoFecha.parse("1980/5/18");
+                String fechaN = formatoFecha.format(fecha).toString();*/
 		
 			
-		System.out.println("Antes de la eliminacion con codigo 11");	
-		System.out.println("-------------------------------------");
+		System.out.println("consulta calles");	
+		System.out.println("---------------");
 		sentencia = conexion.createStatement();
 		impresion();	
-			
+			/*
 		System.out.println("Despues de la eliminacion con codigo 11");	
 		System.out.println("---------------------------------------");
 		String eliminarC = "delete from sistema.alumnos where AL_CODIGO=11";
@@ -63,38 +58,41 @@ public class conexión{
 		sentencia = conexion.createStatement();
 		sentencia.executeUpdate(actualizarF);
 		impresion();
-	
+	*/
 		}
 		catch(Exception e){
 		}
 	}
 	
+        
 	public void impresion() throws SQLException{
-		impresionR = sentencia.executeQuery("select * from sistema.alumnos");
+		impresionR = sentencia.executeQuery("SELECT * FROM EMPLEADO");
 		metaData = impresionR.getMetaData();
 		int columnas = metaData.getColumnCount();
-		System.out.println(metaData.getColumnName(1)+ "\t" + metaData.getColumnName(2) + "\t" +metaData.getColumnName(3) +"\t" +metaData.getColumnName(7));
-		
-		while(impresionR.next()){
+                
+		for(int i =1; i <=columnas;i++ ){
+                    System.out.println(metaData.getColumnName(i));
+                }
+		/*while(impresionR.next()){
 			
-			String codA = impresionR.getString("AL_codigo");
-            String apeA = impresionR.getString("AL_APELLIDOS");
-            String nomA = impresionR.getString("AL_NOMBRES");
-            Date fechaNA = impresionR.getDate("AL_FEC_NAC");
+                String codc = impresionR.getString("codcalles");
+                String nombc = impresionR.getString("nombrecalle");
+                        
+            	System.out.print(codc);
+            	System.out.print(nombc);
             
-            	System.out.printf("%10s",codA);
-            	System.out.printf("%20s",apeA);
-            	System.out.printf("%15s",nomA);
-            	System.out.printf("%15s",fechaNA);
-				System.out.println("");
-		}
-		
+		System.out.println("");
+		}*/
 	}
 	public static void main(String [] andres){
 	conexión prueba = new conexión();
 	try{
-	prueba.conectar();
-	prueba.modificaciones();
+            try {
+                prueba.conectar();
+                prueba.modificaciones();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(conexión.class.getName()).log(Level.SEVERE, null, ex);
+            }
 	}
 	catch(SQLException sqlExepcion){
 		System.out.println(sqlExepcion);
