@@ -71,6 +71,7 @@ public class generarFactura extends javax.swing.JDialog {
         jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Facturacion");
 
         entradaFecha.setEditable(false);
 

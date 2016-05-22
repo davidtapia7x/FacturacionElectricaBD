@@ -19,28 +19,11 @@
                 <Property name="text" type="java.lang.String" value="Servicio"/>
               </Properties>
               <SubComponents>
-                <Menu class="javax.swing.JMenu" name="menuConsFacturaServ">
+                <MenuItem class="javax.swing.JMenuItem" name="item_ConsultaFacServ">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Consultas"/>
                   </Properties>
-                  <SubComponents>
-                    <MenuItem class="javax.swing.JMenuItem" name="item_ConsultaFacServCedula">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Por cedula"/>
-                      </Properties>
-                    </MenuItem>
-                    <MenuItem class="javax.swing.JMenuItem" name="item_ConsultaFacServNumFac">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Por numero de factura"/>
-                      </Properties>
-                    </MenuItem>
-                    <MenuItem class="javax.swing.JMenuItem" name="item_ConsultaFacServNumMed">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Por numero de medidor"/>
-                      </Properties>
-                    </MenuItem>
-                  </SubComponents>
-                </Menu>
+                </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="item_GenerarFacturaServ">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Generar Factura"/>
@@ -61,26 +44,11 @@
                 <Property name="text" type="java.lang.String" value="Instalacion"/>
               </Properties>
               <SubComponents>
-                <Menu class="javax.swing.JMenu" name="menuConsFacturaIns">
+                <MenuItem class="javax.swing.JMenuItem" name="item_ConsultaFacInst">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Consultas"/>
                   </Properties>
-                  <SubComponents>
-                    <MenuItem class="javax.swing.JMenuItem" name="item_ConsultaFacInstCedula">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Por cedula"/>
-                      </Properties>
-                    </MenuItem>
-                    <MenuItem class="javax.swing.JMenuItem" name="item_ConsultaFacInstNumFac">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Por numero de factura"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="item_ConsultaFacInstNumFacActionPerformed"/>
-                      </Events>
-                    </MenuItem>
-                  </SubComponents>
-                </Menu>
+                </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="item_GenerarFacturaInst">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Generar Factura"/>

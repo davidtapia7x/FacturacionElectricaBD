@@ -34,16 +34,11 @@ public class interfazPrincipal extends javax.swing.JFrame {
         barraMenu = new javax.swing.JMenuBar();
         menuFactura = new javax.swing.JMenu();
         menuFacturaServ = new javax.swing.JMenu();
-        menuConsFacturaServ = new javax.swing.JMenu();
-        item_ConsultaFacServCedula = new javax.swing.JMenuItem();
-        item_ConsultaFacServNumFac = new javax.swing.JMenuItem();
-        item_ConsultaFacServNumMed = new javax.swing.JMenuItem();
+        item_ConsultaFacServ = new javax.swing.JMenuItem();
         item_GenerarFacturaServ = new javax.swing.JMenuItem();
         itemMantenimientoFactServ = new javax.swing.JMenuItem();
         menuFacturaInst = new javax.swing.JMenu();
-        menuConsFacturaIns = new javax.swing.JMenu();
-        item_ConsultaFacInstCedula = new javax.swing.JMenuItem();
-        item_ConsultaFacInstNumFac = new javax.swing.JMenuItem();
+        item_ConsultaFacInst = new javax.swing.JMenuItem();
         item_GenerarFacturaInst = new javax.swing.JMenuItem();
         itemMantenimientoFactInst = new javax.swing.JMenuItem();
         menuLectura = new javax.swing.JMenu();
@@ -65,18 +60,8 @@ public class interfazPrincipal extends javax.swing.JFrame {
 
         menuFacturaServ.setText("Servicio");
 
-        menuConsFacturaServ.setText("Consultas");
-
-        item_ConsultaFacServCedula.setText("Por cedula");
-        menuConsFacturaServ.add(item_ConsultaFacServCedula);
-
-        item_ConsultaFacServNumFac.setText("Por numero de factura");
-        menuConsFacturaServ.add(item_ConsultaFacServNumFac);
-
-        item_ConsultaFacServNumMed.setText("Por numero de medidor");
-        menuConsFacturaServ.add(item_ConsultaFacServNumMed);
-
-        menuFacturaServ.add(menuConsFacturaServ);
+        item_ConsultaFacServ.setText("Consultas");
+        menuFacturaServ.add(item_ConsultaFacServ);
 
         item_GenerarFacturaServ.setText("Generar Factura");
         item_GenerarFacturaServ.addActionListener(new java.awt.event.ActionListener() {
@@ -93,20 +78,8 @@ public class interfazPrincipal extends javax.swing.JFrame {
 
         menuFacturaInst.setText("Instalacion");
 
-        menuConsFacturaIns.setText("Consultas");
-
-        item_ConsultaFacInstCedula.setText("Por cedula");
-        menuConsFacturaIns.add(item_ConsultaFacInstCedula);
-
-        item_ConsultaFacInstNumFac.setText("Por numero de factura");
-        item_ConsultaFacInstNumFac.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                item_ConsultaFacInstNumFacActionPerformed(evt);
-            }
-        });
-        menuConsFacturaIns.add(item_ConsultaFacInstNumFac);
-
-        menuFacturaInst.add(menuConsFacturaIns);
+        item_ConsultaFacInst.setText("Consultas");
+        menuFacturaInst.add(item_ConsultaFacInst);
 
         item_GenerarFacturaInst.setText("Generar Factura");
         menuFacturaInst.add(item_GenerarFacturaInst);
@@ -161,10 +134,6 @@ public class interfazPrincipal extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null,"Hola que tal!");
     }//GEN-LAST:event_item_GenerarFacturaServActionPerformed
 
-    private void item_ConsultaFacInstNumFacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_ConsultaFacInstNumFacActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_item_ConsultaFacInstNumFacActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -206,18 +175,13 @@ public class interfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemCRUDParametro;
     private javax.swing.JMenuItem itemMantenimientoFactInst;
     private javax.swing.JMenuItem itemMantenimientoFactServ;
-    private javax.swing.JMenuItem item_ConsultaFacInstCedula;
-    private javax.swing.JMenuItem item_ConsultaFacInstNumFac;
-    private javax.swing.JMenuItem item_ConsultaFacServCedula;
-    private javax.swing.JMenuItem item_ConsultaFacServNumFac;
-    private javax.swing.JMenuItem item_ConsultaFacServNumMed;
+    private javax.swing.JMenuItem item_ConsultaFacInst;
+    private javax.swing.JMenuItem item_ConsultaFacServ;
     private javax.swing.JMenuItem item_GenerarFacturaInst;
     private javax.swing.JMenuItem item_GenerarFacturaServ;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JLabel logoCentroSur;
     private javax.swing.JMenu menuAcercaDe;
-    private javax.swing.JMenu menuConsFacturaIns;
-    private javax.swing.JMenu menuConsFacturaServ;
     private javax.swing.JMenu menuConsultaLectura;
     private javax.swing.JMenu menuConsultaParametro;
     private javax.swing.JMenu menuFactura;
