@@ -1,7 +1,8 @@
 package clases;
 
 import java.sql.*;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -70,22 +71,27 @@ public class conexión{
 		metaData = impresionR.getMetaData();
 		int columnas = metaData.getColumnCount();
          
-		for(int i =1; i <=columnas;i++ ){
+		
+                
+                List<List<Object>> result = new ArrayList<>();  // List of list, one per row
+                
+                List<Object> header = new ArrayList<>(columnas);
+                for(int i =1; i <=columnas;i++ ){
                     System.out.println(metaData.getColumnName(i));
+                    header.add(metaData.getColumnName(i));
                 }
-                
-                Object a[] = new Object[columnas];
-                
-		while(impresionR.next()){
-                    for(int i =0; i <columnas;i++ ){
-                        a[i] = impresionR.getObject(i+1);
-                        System.out.println(a[i].toString());
+                result.add(header);
+                while (impresionR.next()) {
+                    List<Object> row = new ArrayList<>(columnas); // new list per row
+                    int i = 1;
+                    while (i <= columnas) {  // don't skip the last column, use <=
+                        row.add(impresionR.getObject(i));
+                        System.out.println(impresionR.getObject(i).toString());
+                        i++;
                     }
-                
-                    //System.out.print(codc);
-                    //System.out.print(nombc);
-                    //System.out.println("");
-		}
+                    result.add(row); // add it to the result
+                }
+            
 	}
 	public static void main(String [] andres){
 	conexión prueba = new conexión();
