@@ -11,7 +11,7 @@
     <class>masterDetail.ServicioAdicional_1</class>
     <class>masterDetail.Parametro</class>
     <class>masterDetail.Tarifa_1</class>
-    <class>masterDetail.Calles</class>
+    <class>masterDetail.CallesControll</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:XE"/>
       <property name="javax.persistence.jdbc.user" value="FACTURACIONELECTRICA"/>
