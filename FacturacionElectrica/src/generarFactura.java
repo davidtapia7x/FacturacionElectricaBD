@@ -11,7 +11,6 @@ import javax.swing.table.DefaultTableModel;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Andrés Campoverde <andrescamp_ac at hotmail.com>
@@ -25,19 +24,17 @@ public class generarFactura extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
-    public void cargarTabla2( ArrayList datos)
-    {
 
-        String[] titulos = (String[])datos.get(0);
-       DefaultTableModel modelo = new DefaultTableModel(null, titulos);
-       
-     
-     for(int i=1;i<datos.size();i++)
-     {
-         String registro[]= (String[])datos.get(i);
-        modelo.addRow(registro);
-     }
-      tablaServicio.setModel(modelo);  //Nombre de la tabla    
+    public void cargarTabla2(ArrayList datos) {
+
+        String[] titulos = (String[]) datos.get(0);
+        DefaultTableModel modelo = new DefaultTableModel(null, titulos);
+
+        for (int i = 1; i < datos.size(); i++) {
+            String registro[] = (String[]) datos.get(i);
+            modelo.addRow(registro);
+        }
+        tablaServicio.setModel(modelo);  //Nombre de la tabla    
     }
 
     /**
@@ -239,18 +236,17 @@ public class generarFactura extends javax.swing.JDialog {
 
     private void botonEmitirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEmitirActionPerformed
         conexión prueba = new conexión();
-	try{
+        try {
             try {
                 prueba.conectar();
-                ArrayList a = prueba.impresion();
+                ArrayList a = prueba.impresion("SELECT * FROM CALLES");
                 cargarTabla2(a);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(conexión.class.getName()).log(Level.SEVERE, null, ex);
             }
-	}
-	catch(SQLException sqlExepcion){
-		System.out.println(sqlExepcion);
-	}
+        } catch (SQLException sqlExepcion) {
+            System.out.println(sqlExepcion);
+        }
     }//GEN-LAST:event_botonEmitirActionPerformed
 
     private void entradaCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entradaCodigoActionPerformed
