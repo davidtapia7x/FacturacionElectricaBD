@@ -1,9 +1,13 @@
 
 import clases.conexión;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -24,7 +28,31 @@ public class generarFactura extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
-
+    
+    ///ESTOS DEBERIAN IR EN CLASE DE CONEXION?
+    private int obtener_num_fac(){
+        int valor=1;
+        conexión prueba = new conexión();
+        try {
+            try {
+                prueba.conectar();
+                ArrayList a = prueba.impresion("SELECT MAX(NUM_FAC_SERV) " +
+                                                "FROM FACTURA_SERVICIO");
+                String registro[] = (String[]) a.get(1);
+                if(registro[0]!=null){
+                    valor = (int)a.get(1);
+                    valor++;
+                }
+                
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(conexión.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (SQLException sqlExepcion) {
+            System.out.println(sqlExepcion);
+        }
+        
+        return valor;
+    }
     public void cargarTabla2(ArrayList datos) {
 
         String[] titulos = (String[]) datos.get(0);
@@ -36,6 +64,50 @@ public class generarFactura extends javax.swing.JDialog {
         }
         tablaServicio.setModel(modelo);  //Nombre de la tabla    
     }
+    private String obtener_nom_calle(String cod){
+        String nombre="";
+        conexión prueba = new conexión();
+        try {
+            try {
+                prueba.conectar();
+                ArrayList a = prueba.impresion("select \"CALLES\".\"NOMBRECALLE\" " +
+                                                "FROM CALLES " +
+                                                "WHERE CALLES.CODCALLES='"+cod+"'");
+                String registro[] = (String[]) a.get(1);
+                nombre = registro[0];
+                
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(conexión.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (SQLException sqlExepcion) {
+            System.out.println(sqlExepcion);
+        }
+        return nombre;
+    } 
+    private String obtener_fecha(){
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Date date = new Date();
+        return dateFormat.format(date); //2014/08/06 15:59:48
+    }
+    public void cargarDatos(ArrayList datos) {
+        if(datos.size()>1){
+            int numero_factura = obtener_num_fac();
+            //cod medidor, desc uso, calle1, calle 2, calle 3, ced id, nombre appellido1, appleido 2, telefono
+            String registro[] = (String[]) datos.get(1);
+            entradaTarifa.setText(registro[1]);
+            entradaCedula.setText(registro[5]);
+            entradaFecha.setText(obtener_fecha());
+            entradaNombre.setText(registro[6] + " " + registro[7] +" "+registro[8].charAt(0));
+            textoDireccion.setText(obtener_nom_calle(registro[2])+" "+obtener_nom_calle(registro[3])+" "+obtener_nom_calle(registro[4]));
+            entradaNFactura.setText(Integer.toString(numero_factura));
+            entradaTelefono.setText(registro[9]);
+        }else{
+            JOptionPane.showMessageDialog(null,"No existe el medidor indicado");
+        }
+        
+    }
+     
+     //////////////////////
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -126,6 +198,12 @@ public class generarFactura extends javax.swing.JDialog {
         etiquetaTelf.setText("07282938");
 
         etiquetaTarifa.setText("Tarifa:");
+
+        entradaCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                entradaCodigoActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Total:");
 
@@ -240,8 +318,9 @@ public class generarFactura extends javax.swing.JDialog {
         try {
             try {
                 prueba.conectar();
-                ArrayList a = prueba.impresion("SELECT * FROM CALLES");
-                cargarTabla2(a);
+                //ArrayList a = prueba.impresion("select MEDIDOR.COD_MEDIDOR as \"Codigo Medidor\", 	 USOS.DESCRIPCIONUSO as \"DESCRIPCIONUSO\", 	 PREDIO.CALLE1 as \"CALLE1\", 	 PREDIO.CALLE2 as \"CALLE2\", 	 PREDIO.CALLE3 as \"CALLE3\", 	 PREDIO.CIDENTIDAD as \"CIDENTIDAD\", 	 PROPIETARIO.NOMBRE1 as \"NOMBRE1\", 	 PROPIETARIO.APELLIDO1 as \"APELLIDO1\", 	 PROPIETARIO.APELLIDO2 as \"APELLIDO2\", 	 PROPIETARIO.TELEFONO as \"TELEFONO\"   from	 USOS, 	 PROPIETARIO, 	 PREDIO, 	 MEDIDOR where   MEDIDOR.CLAVECATASTRAL=PREDIO.CLAVECATASTRAL and	 PREDIO.CIDENTIDAD=PROPIETARIO.IDENT and	 PREDIO.CDUSO=USOS.CODUSOS and 	 MEDIDOR.COD_MEDIDOR = '400'");
+                
+              
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(conexión.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -254,7 +333,53 @@ public class generarFactura extends javax.swing.JDialog {
         //Realizar consulta que obtenga los datos pertinentes
         //primero generar un numero de factura nuevo
         //luego con el codigo de medidor obtener el id del propietario
-        //
+        conexión prueba = new conexión();
+        try {
+            try {
+                prueba.conectar();
+                ArrayList a = prueba.impresion("select \"MEDIDOR\".\"COD_MEDIDOR\" as \"Codigo Medidor\", " +
+"	 \"USOS\".\"DESCRIPCIONUSO\" as \"DESCRIPCIONUSO\", " +
+"	 \"PREDIO\".\"CALLE1\" as \"CALLE1\", " +
+"	 \"PREDIO\".\"CALLE2\" as \"CALLE2\", " +
+"	 \"PREDIO\".\"CALLE3\" as \"CALLE3\", " +
+"	 \"PREDIO\".\"CIDENTIDAD\" as \"CIDENTIDAD\", " +
+"	 \"PROPIETARIO\".\"NOMBRE1\" as \"NOMBRE1\", " +
+"	 \"PROPIETARIO\".\"APELLIDO1\" as \"APELLIDO1\", " +
+"	 \"PROPIETARIO\".\"APELLIDO2\" as \"APELLIDO2\", " +
+"	 \"PROPIETARIO\".\"TELEFONO\" as \"TELEFONO\"  " +
+" from	 \"USOS\", " +
+"	 \"PROPIETARIO\", " +
+"	 \"PREDIO\", " +
+"	 \"MEDIDOR\" " +
+"where   \"MEDIDOR\".\"CLAVECATASTRAL\"=\"PREDIO\".\"CLAVECATASTRAL\" " +
+"and	 \"PREDIO\".\"CIDENTIDAD\"=\"PROPIETARIO\".\"IDENT\" " +
+"and	 \"PREDIO\".\"CDUSO\"=\"USOS\".\"CODUSOS\" " +
+"and 	 \"MEDIDOR\".\"COD_MEDIDOR\" = "+"'"+entradaCodigo.getText()+"'");
+                System.out.println("select \"MEDIDOR\".\"COD_MEDIDOR\" as \"Codigo Medidor\", " +
+"	 \"USOS\".\"DESCRIPCIONUSO\" as \"DESCRIPCIONUSO\", " +
+"	 \"PREDIO\".\"CALLE1\" as \"CALLE1\", " +
+"	 \"PREDIO\".\"CALLE2\" as \"CALLE2\", " +
+"	 \"PREDIO\".\"CALLE3\" as \"CALLE3\", " +
+"	 \"PREDIO\".\"CIDENTIDAD\" as \"CIDENTIDAD\", " +
+"	 \"PROPIETARIO\".\"NOMBRE1\" as \"NOMBRE1\", " +
+"	 \"PROPIETARIO\".\"APELLIDO1\" as \"APELLIDO1\", " +
+"	 \"PROPIETARIO\".\"APELLIDO2\" as \"APELLIDO2\", " +
+"	 \"PROPIETARIO\".\"TELEFONO\" as \"TELEFONO\"  " +
+" from	 \"USOS\", " +
+"	 \"PROPIETARIO\", " +
+"	 \"PREDIO\", " +
+"	 \"MEDIDOR\" " +
+"where   \"MEDIDOR\".\"CLAVECATASTRAL\"=\"PREDIO\".\"CLAVECATASTRAL\" " +
+"and	 \"PREDIO\".\"CIDENTIDAD\"=\"PROPIETARIO\".\"IDENT\" " +
+"and	 \"PREDIO\".\"CDUSO\"=\"USOS\".\"CODUSOS\" " +
+"and 	 \"MEDIDOR\".\"COD_MEDIDOR\" = "+"'"+entradaCodigo.getText()+"'");
+                cargarDatos(a);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(conexión.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (SQLException sqlExepcion) {
+            System.out.println(sqlExepcion);
+        }
     }//GEN-LAST:event_entradaCodigoActionPerformed
 
     /**

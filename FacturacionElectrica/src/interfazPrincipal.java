@@ -61,6 +61,11 @@ public class interfazPrincipal extends javax.swing.JFrame {
         menuFacturaServ.setText("Servicio");
 
         item_ConsultaFacServ.setText("Consultas");
+        item_ConsultaFacServ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                item_ConsultaFacServActionPerformed(evt);
+            }
+        });
         menuFacturaServ.add(item_ConsultaFacServ);
 
         item_GenerarFacturaServ.setText("Generar Factura");
@@ -131,8 +136,14 @@ public class interfazPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void item_GenerarFacturaServActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_GenerarFacturaServActionPerformed
-        JOptionPane.showMessageDialog(null,"Hola que tal!");
+        generarFactura FacServ = new generarFactura(this,true);
+        FacServ.setVisible(true);
     }//GEN-LAST:event_item_GenerarFacturaServActionPerformed
+
+    private void item_ConsultaFacServActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_ConsultaFacServActionPerformed
+        interfazConsultaFactServ consulta = new interfazConsultaFactServ(this,true);
+        consulta.setVisible(true);
+    }//GEN-LAST:event_item_ConsultaFacServActionPerformed
 
     /**
      * @param args the command line arguments

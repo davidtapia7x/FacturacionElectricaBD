@@ -23,6 +23,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Consultas"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="item_ConsultaFacServActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="item_GenerarFacturaServ">
                   <Properties>

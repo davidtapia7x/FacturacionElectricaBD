@@ -51,14 +51,18 @@ public class conexión{
                     while (i <= columnas) {  // don't skip the last column, use <=
                         //row.add(impresionR.getObject(i));
                         fila[i-1]=impresionR.getString(i);
-                        System.out.println(impresionR.getObject(i).toString());
+                        if(impresionR.getString(i)!=null){
+                            System.out.println(impresionR.getObject(i).toString());
+                        }else{
+                            System.out.println("null");
+                        }
                         i++;
                     }
                     ayuda.add(fila); // add it to the result
                 }
                 return ayuda;
 	}
-	public static void main(String [] andres){
+	/*public static void main(String [] andres){
 	conexión prueba = new conexión();
 	try{
             try {
@@ -72,5 +76,5 @@ public class conexión{
 	catch(SQLException sqlExepcion){
 		System.out.println(sqlExepcion);
 	}
-	}	
+	}*/	
 }
