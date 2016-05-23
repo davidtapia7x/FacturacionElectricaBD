@@ -31,6 +31,7 @@ public class interfazPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
         logoCentroSur = new javax.swing.JLabel();
         barraMenu = new javax.swing.JMenuBar();
         menuFactura = new javax.swing.JMenu();
@@ -40,6 +41,8 @@ public class interfazPrincipal extends javax.swing.JFrame {
         itemMantenimientoFactServ = new javax.swing.JMenuItem();
         menuLectura = new javax.swing.JMenu();
         itemCRUDLectura = new javax.swing.JMenuItem();
+        menuEmpleado = new javax.swing.JMenu();
+        itemCRUDEmpleado = new javax.swing.JMenuItem();
         menuParametro = new javax.swing.JMenu();
         itemCRUDParametro = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
@@ -52,6 +55,8 @@ public class interfazPrincipal extends javax.swing.JFrame {
         itemAyudaAcercaDe = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
+
+        jMenu2.setText("jMenu2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu Principal");
@@ -96,6 +101,18 @@ public class interfazPrincipal extends javax.swing.JFrame {
         menuLectura.add(itemCRUDLectura);
 
         barraMenu.add(menuLectura);
+
+        menuEmpleado.setText("Empleado");
+
+        itemCRUDEmpleado.setText("CRUD");
+        itemCRUDEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemCRUDEmpleadoActionPerformed(evt);
+            }
+        });
+        menuEmpleado.add(itemCRUDEmpleado);
+
+        barraMenu.add(menuEmpleado);
 
         menuParametro.setText("Parametros");
 
@@ -200,7 +217,7 @@ public class interfazPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_itemAyudaAcercaDeActionPerformed
 
     private void itemCRUDLecturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCRUDLecturaActionPerformed
-       
+        LECTURA.main(new String[0]);       
     }//GEN-LAST:event_itemCRUDLecturaActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -212,7 +229,7 @@ public class interfazPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        predio.main(new String[0]);
+        Predio.main(new String[0]);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
@@ -222,6 +239,10 @@ public class interfazPrincipal extends javax.swing.JFrame {
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         propietario.main(new String[0]);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void itemCRUDEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCRUDEmpleadoActionPerformed
+        EMPLEADO.main(new String[0]);
+    }//GEN-LAST:event_itemCRUDEmpleadoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -261,12 +282,14 @@ public class interfazPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar barraMenu;
     private javax.swing.JMenuItem itemAyudaAcercaDe;
+    private javax.swing.JMenuItem itemCRUDEmpleado;
     private javax.swing.JMenuItem itemCRUDLectura;
     private javax.swing.JMenuItem itemCRUDParametro;
     private javax.swing.JMenuItem itemMantenimientoFactServ;
     private javax.swing.JMenuItem item_ConsultaFacServ;
     private javax.swing.JMenuItem item_GenerarFacturaServ;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
@@ -275,6 +298,7 @@ public class interfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JLabel logoCentroSur;
     private javax.swing.JMenu menuAcercaDe;
+    private javax.swing.JMenu menuEmpleado;
     private javax.swing.JMenu menuFactura;
     private javax.swing.JMenu menuFacturaServ;
     private javax.swing.JMenu menuLectura;

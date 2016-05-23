@@ -23,16 +23,13 @@ public void modificar(String modif) throws SQLException{
 		
 		sentencia = conexion.createStatement();
 		sentencia.execute(modif);
-		
-		
-		
+				
 		System.out.println("Creacion con codigo 11");	
 		System.out.println("----------------------");
 		
 		sentencia = conexion.createStatement();
 		sentencia.executeUpdate(modif);
-		
-}
+	}
         
 	public void conectar() throws SQLException, ClassNotFoundException{
 		conexion = null;

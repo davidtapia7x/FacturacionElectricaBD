@@ -22,6 +22,8 @@
   <persistence-unit name="localhost:1521PU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>masterDetail.Lectura_1</class>
+    <class>masterDetail.Predio_1</class>
+    <class>masterDetail.Empleado_1</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@//localhost:1521"/>
       <property name="javax.persistence.jdbc.user" value="FACTURACIONELECTRICA"/>

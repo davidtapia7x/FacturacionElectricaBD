@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package masterDetail;
 
 import java.beans.PropertyChangeListener;
@@ -18,8 +19,8 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 /**
- *
- * @author David
+ * 
+ * @author Andrés Campoverde <andrescamp_ac at hotmail.com>
  */
 @Entity
 @Table(name = "PREDIO", catalog = "", schema = "FACTURACIONELECTRICA")
@@ -32,10 +33,8 @@ import javax.persistence.Transient;
     @NamedQuery(name = "Predio_1.findByCalle2", query = "SELECT p FROM Predio_1 p WHERE p.calle2 = :calle2"),
     @NamedQuery(name = "Predio_1.findByCalle3", query = "SELECT p FROM Predio_1 p WHERE p.calle3 = :calle3")})
 public class Predio_1 implements Serializable {
-
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
-
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -159,5 +158,5 @@ public class Predio_1 implements Serializable {
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         changeSupport.removePropertyChangeListener(listener);
     }
-    
+
 }
