@@ -241,7 +241,45 @@ public class generarFactura extends javax.swing.JDialog {
         }
         
     }
-     
+    public void agregarFactServPag(String lect){
+        conexión prueba = new conexión();
+            try {
+                try {
+                    prueba.conectar();
+                    //ArrayList a = prueba.impresion("select MEDIDOR.COD_MEDIDOR as \"Codigo Medidor\", 	 USOS.DESCRIPCIONUSO as \"DESCRIPCIONUSO\", 	 PREDIO.CALLE1 as \"CALLE1\", 	 PREDIO.CALLE2 as \"CALLE2\", 	 PREDIO.CALLE3 as \"CALLE3\", 	 PREDIO.CIDENTIDAD as \"CIDENTIDAD\", 	 PROPIETARIO.NOMBRE1 as \"NOMBRE1\", 	 PROPIETARIO.APELLIDO1 as \"APELLIDO1\", 	 PROPIETARIO.APELLIDO2 as \"APELLIDO2\", 	 PROPIETARIO.TELEFONO as \"TELEFONO\"   from	 USOS, 	 PROPIETARIO, 	 PREDIO, 	 MEDIDOR where   MEDIDOR.CLAVECATASTRAL=PREDIO.CLAVECATASTRAL and	 PREDIO.CIDENTIDAD=PROPIETARIO.IDENT and	 PREDIO.CDUSO=USOS.CODUSOS and 	 MEDIDOR.COD_MEDIDOR = '400'");
+                    prueba.modificar("insert into LEC_FACT_PAGADA (NUM_LECTURA,COD_MEDIDOR, NUM_FAC_SERV) VALUES ("+lect+",'"+entradaCodigo.getText()+"',"+entradaNFactura.getText()+")");
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(conexión.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } catch (SQLException sqlExepcion) {
+                System.out.println(sqlExepcion);
+            }
+    }
+    public void generarFact(float tot, int numfilas,int seleccionadas)
+    {
+        if(tot>0){
+            conexión prueba = new conexión();
+            try {
+                try {
+                    prueba.conectar();
+                    //ArrayList a = prueba.impresion("select MEDIDOR.COD_MEDIDOR as \"Codigo Medidor\", 	 USOS.DESCRIPCIONUSO as \"DESCRIPCIONUSO\", 	 PREDIO.CALLE1 as \"CALLE1\", 	 PREDIO.CALLE2 as \"CALLE2\", 	 PREDIO.CALLE3 as \"CALLE3\", 	 PREDIO.CIDENTIDAD as \"CIDENTIDAD\", 	 PROPIETARIO.NOMBRE1 as \"NOMBRE1\", 	 PROPIETARIO.APELLIDO1 as \"APELLIDO1\", 	 PROPIETARIO.APELLIDO2 as \"APELLIDO2\", 	 PROPIETARIO.TELEFONO as \"TELEFONO\"   from	 USOS, 	 PROPIETARIO, 	 PREDIO, 	 MEDIDOR where   MEDIDOR.CLAVECATASTRAL=PREDIO.CLAVECATASTRAL and	 PREDIO.CIDENTIDAD=PROPIETARIO.IDENT and	 PREDIO.CDUSO=USOS.CODUSOS and 	 MEDIDOR.COD_MEDIDOR = '400'");
+                    prueba.modificar("insert into FACTURA_SERVICIO (NUM_FAC_SERV,ID_PROPIETARIO, ID_EMPLEADO,FECHA_PAGO,TOTAL) VALUES ("+entradaNFactura.getText()+",'"+entradaCedula.getText()+"','0106625437','"+entradaFecha.getText()+"',"+txtTotal.getText()+")");
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(conexión.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } catch (SQLException sqlExepcion) {
+                System.out.println(sqlExepcion);
+            }
+            //String lecturas_pagadas[] = new String[seleccionadas];
+            for(int i=0;i<numfilas;i++){
+                if((boolean)tablaServicio.getValueAt(i, 3)){
+                    agregarFactServPag((String)tablaServicio.getValueAt(i, 0));
+                }
+            }
+        }else{
+            JOptionPane.showMessageDialog(null,"No hay datos a generar!");
+        }
+    }
      //////////////////////
 
     /**
@@ -463,31 +501,20 @@ public class generarFactura extends javax.swing.JDialog {
         //REVISAR SI ES QUE HA SELECCIONADO ITEMS A PAGAR
         TableModel tm = tablaServicio.getModel();
         float total=0;
+        int seleccionadas= 0;
         if(tm.getRowCount()>=1){
             for (int i = 0; i < tm.getRowCount(); i++) {
                 //System.out.println(tablaServicio.getValueAt(i, 3));
                 if((boolean)tablaServicio.getValueAt(i, 3)){
+                    seleccionadas++;
                     total += Float.parseFloat((String)(tablaServicio.getValueAt(i, 2)));
                 }
             }
             txtTotal.setText(Float.toString(total));
+            generarFact(total,tm.getRowCount(),seleccionadas);
         }else{
             JOptionPane.showMessageDialog(null,"Ingrese datos primero!");
         }
-        
-        /*conexión prueba = new conexión();
-        try {
-            try {
-                prueba.conectar();
-                //ArrayList a = prueba.impresion("select MEDIDOR.COD_MEDIDOR as \"Codigo Medidor\", 	 USOS.DESCRIPCIONUSO as \"DESCRIPCIONUSO\", 	 PREDIO.CALLE1 as \"CALLE1\", 	 PREDIO.CALLE2 as \"CALLE2\", 	 PREDIO.CALLE3 as \"CALLE3\", 	 PREDIO.CIDENTIDAD as \"CIDENTIDAD\", 	 PROPIETARIO.NOMBRE1 as \"NOMBRE1\", 	 PROPIETARIO.APELLIDO1 as \"APELLIDO1\", 	 PROPIETARIO.APELLIDO2 as \"APELLIDO2\", 	 PROPIETARIO.TELEFONO as \"TELEFONO\"   from	 USOS, 	 PROPIETARIO, 	 PREDIO, 	 MEDIDOR where   MEDIDOR.CLAVECATASTRAL=PREDIO.CLAVECATASTRAL and	 PREDIO.CIDENTIDAD=PROPIETARIO.IDENT and	 PREDIO.CDUSO=USOS.CODUSOS and 	 MEDIDOR.COD_MEDIDOR = '400'");
-                   
-                
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(conexión.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch (SQLException sqlExepcion) {
-            System.out.println(sqlExepcion);
-        }*/
     }//GEN-LAST:event_botonEmitirActionPerformed
 
     private void entradaCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entradaCodigoActionPerformed

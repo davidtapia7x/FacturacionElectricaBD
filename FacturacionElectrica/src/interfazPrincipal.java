@@ -1,6 +1,6 @@
 
 import javax.swing.JOptionPane;
-import masterDetail.parametros;
+import masterDetail.*;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -38,15 +38,9 @@ public class interfazPrincipal extends javax.swing.JFrame {
         item_ConsultaFacServ = new javax.swing.JMenuItem();
         item_GenerarFacturaServ = new javax.swing.JMenuItem();
         itemMantenimientoFactServ = new javax.swing.JMenuItem();
-        menuFacturaInst = new javax.swing.JMenu();
-        item_ConsultaFacInst = new javax.swing.JMenuItem();
-        item_GenerarFacturaInst = new javax.swing.JMenuItem();
-        itemMantenimientoFactInst = new javax.swing.JMenuItem();
         menuLectura = new javax.swing.JMenu();
-        menuConsultaLectura = new javax.swing.JMenu();
         itemCRUDLectura = new javax.swing.JMenuItem();
         menuParametro = new javax.swing.JMenu();
-        menuConsultaParametro = new javax.swing.JMenu();
         itemCRUDParametro = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -89,40 +83,9 @@ public class interfazPrincipal extends javax.swing.JFrame {
 
         menuFactura.add(menuFacturaServ);
 
-        menuFacturaInst.setText("Instalacion");
-
-        item_ConsultaFacInst.setText("Consultas");
-        item_ConsultaFacInst.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                item_ConsultaFacInstActionPerformed(evt);
-            }
-        });
-        menuFacturaInst.add(item_ConsultaFacInst);
-
-        item_GenerarFacturaInst.setText("Generar Factura");
-        item_GenerarFacturaInst.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                item_GenerarFacturaInstActionPerformed(evt);
-            }
-        });
-        menuFacturaInst.add(item_GenerarFacturaInst);
-
-        itemMantenimientoFactInst.setText("Mantenimiento");
-        itemMantenimientoFactInst.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemMantenimientoFactInstActionPerformed(evt);
-            }
-        });
-        menuFacturaInst.add(itemMantenimientoFactInst);
-
-        menuFactura.add(menuFacturaInst);
-
         barraMenu.add(menuFactura);
 
         menuLectura.setText("Lecturas");
-
-        menuConsultaLectura.setText("Consultas");
-        menuLectura.add(menuConsultaLectura);
 
         itemCRUDLectura.setText("CRUD");
         itemCRUDLectura.addActionListener(new java.awt.event.ActionListener() {
@@ -135,9 +98,6 @@ public class interfazPrincipal extends javax.swing.JFrame {
         barraMenu.add(menuLectura);
 
         menuParametro.setText("Parametros");
-
-        menuConsultaParametro.setText("Consultas");
-        menuParametro.add(menuConsultaParametro);
 
         itemCRUDParametro.setText("CRUD");
         itemCRUDParametro.addActionListener(new java.awt.event.ActionListener() {
@@ -152,18 +112,43 @@ public class interfazPrincipal extends javax.swing.JFrame {
         jMenu1.setText("Otros");
 
         jMenuItem2.setText("Medidor CRUD");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem2);
 
         jMenuItem3.setText("Calles CRUD");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem3);
 
         jMenuItem4.setText("Predio CRUD");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem4);
 
         jMenuItem6.setText("Rubro CRUD");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem6);
 
         jMenuItem5.setText("Propietario CRUD");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem5);
 
         barraMenu.add(jMenu1);
@@ -218,18 +203,25 @@ public class interfazPrincipal extends javax.swing.JFrame {
        
     }//GEN-LAST:event_itemCRUDLecturaActionPerformed
 
-    private void item_GenerarFacturaInstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_GenerarFacturaInstActionPerformed
-        generarFacturaInstalacion nueva = new generarFacturaInstalacion(this,true);
-        nueva.setVisible(true);
-    }//GEN-LAST:event_item_GenerarFacturaInstActionPerformed
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        medidor.main(new String[0]);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void item_ConsultaFacInstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_ConsultaFacInstActionPerformed
-       
-    }//GEN-LAST:event_item_ConsultaFacInstActionPerformed
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        Calle.main(new String[0]);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    private void itemMantenimientoFactInstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMantenimientoFactInstActionPerformed
-       
-    }//GEN-LAST:event_itemMantenimientoFactInstActionPerformed
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        predio.main(new String[0]);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        rubro.main(new String[0]);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        propietario.main(new String[0]);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -271,11 +263,8 @@ public class interfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemAyudaAcercaDe;
     private javax.swing.JMenuItem itemCRUDLectura;
     private javax.swing.JMenuItem itemCRUDParametro;
-    private javax.swing.JMenuItem itemMantenimientoFactInst;
     private javax.swing.JMenuItem itemMantenimientoFactServ;
-    private javax.swing.JMenuItem item_ConsultaFacInst;
     private javax.swing.JMenuItem item_ConsultaFacServ;
-    private javax.swing.JMenuItem item_GenerarFacturaInst;
     private javax.swing.JMenuItem item_GenerarFacturaServ;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
@@ -286,10 +275,7 @@ public class interfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JLabel logoCentroSur;
     private javax.swing.JMenu menuAcercaDe;
-    private javax.swing.JMenu menuConsultaLectura;
-    private javax.swing.JMenu menuConsultaParametro;
     private javax.swing.JMenu menuFactura;
-    private javax.swing.JMenu menuFacturaInst;
     private javax.swing.JMenu menuFacturaServ;
     private javax.swing.JMenu menuLectura;
     private javax.swing.JMenu menuParametro;
