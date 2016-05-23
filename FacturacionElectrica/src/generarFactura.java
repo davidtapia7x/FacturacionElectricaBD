@@ -40,7 +40,7 @@ public class generarFactura extends javax.swing.JDialog {
                                                 "FROM FACTURA_SERVICIO");
                 String registro[] = (String[]) a.get(1);
                 if(registro[0]!=null){
-                    valor = (int)a.get(1);
+                    valor = Integer.parseInt(registro[0]);
                     valor++;
                 }
                 
@@ -53,13 +53,48 @@ public class generarFactura extends javax.swing.JDialog {
         
         return valor;
     }
-    public void cargarTabla2(ArrayList datos) {
-
-        String[] titulos = (String[]) datos.get(0);
-        DefaultTableModel modelo = new DefaultTableModel(null, titulos);
-
+    private float obtener_tarifa(String cod_uso){
+        float valor=0;
+        conexión prueba = new conexión();
+        try {
+            try {
+                prueba.conectar();
+                ArrayList a = prueba.impresion("SELECT TARIFA.TARIFA FROM TARIFA,USOS WHERE TARIFA.COD_USO =USOS.CODUSOS AND USOS.DESCRIPCIONUSO='"+cod_uso+"'");
+                String registro[] = (String[]) a.get(1);
+                if(registro[0]!=null){
+                    valor = Float.parseFloat(registro[0]);
+                }else{
+                    JOptionPane.showMessageDialog(null,"No existe esa tarifa!");
+                }
+                
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(conexión.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (SQLException sqlExepcion) {
+            System.out.println(sqlExepcion);
+        }
+        
+        return valor;
+    }
+    
+    public void cargarTabla2(ArrayList datos,String desc_uso) {
+        float tarifa = obtener_tarifa(desc_uso);
+        tarifa = Math.round(tarifa*(float)100.0)/(float)100.0;
+        //String[] titulos = {"Lectura","Consumo","Valor ($)","Pagar"};
+        DefaultTableModel modelo = (DefaultTableModel)tablaServicio.getModel();//new DefaultTableModel(null, titulos);
+        Object registro[] = new Object[4];
+        float valor_consumo = 0,cons=0;
         for (int i = 1; i < datos.size(); i++) {
-            String registro[] = (String[]) datos.get(i);
+            
+            String Lectura[] = (String[]) datos.get(i);
+            registro[0] = (String)Lectura[0];
+            cons = calcular_consumo(Integer.parseInt(Lectura[0]));
+            registro[1] = (String)Float.toString(cons);
+            //Calcular valor
+            valor_consumo = cons*tarifa;
+            registro[2] = (String)Float.toString(valor_consumo);
+            //Colocar booleano
+            registro[3] = (boolean) false;
             modelo.addRow(registro);
         }
         tablaServicio.setModel(modelo);  //Nombre de la tabla    
@@ -89,6 +124,68 @@ public class generarFactura extends javax.swing.JDialog {
         Date date = new Date();
         return dateFormat.format(date); //2014/08/06 15:59:48
     }
+    private float calcular_consumo(int codigo_lectura){
+        float consumo = 0,consumo_anterior=0;
+        conexión prueba = new conexión();
+        //consumo
+        try {
+                try {
+                    prueba.conectar();
+                    ArrayList a = prueba.impresion("SELECT LECTURA.VALOR_LECTURA " +
+                                                    "FROM LECTURA WHERE LECTURA.NUM_LECTURA="+Integer.toString(codigo_lectura));
+                    String registro[] = (String[]) a.get(1);
+                    if(registro[0]!=null){
+                        consumo = Float.parseFloat(registro[0]);
+                    }
+
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(conexión.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } catch (SQLException sqlExepcion) {
+                System.out.println(sqlExepcion);
+        }
+        
+   
+        if(codigo_lectura!=1){
+            try {
+                try {
+                    prueba.conectar();
+                    ArrayList a = prueba.impresion("SELECT LECTURA.VALOR_LECTURA " +
+                                                    "FROM LECTURA WHERE LECTURA.NUM_LECTURA="+Integer.toString(codigo_lectura-1));
+                    String registro[] = (String[]) a.get(1);
+                    if(registro[0]!=null){
+                        consumo_anterior = Float.parseFloat(registro[0]);
+                    }
+
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(conexión.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } catch (SQLException sqlExepcion) {
+                System.out.println(sqlExepcion);
+            }
+        }else if(codigo_lectura==1){
+            try {
+                try {
+                    prueba.conectar();
+                    ArrayList a = prueba.impresion("SELECT MEDIDOR.CONSUMO_INICIAL " +
+                                                    "FROM MEDIDOR, LECTURA WHERE MEDIDOR.COD_MEDIDOR=LECTURA.COD_MEDIDOR and LECTURA.NUM_LECTURA="+Integer.toString(codigo_lectura));
+                    String registro[] = (String[]) a.get(1);
+                    if(registro[0]!=null){
+                        consumo_anterior = Float.parseFloat(registro[0]);
+                    }
+
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(conexión.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } catch (SQLException sqlExepcion) {
+                System.out.println(sqlExepcion);
+            }
+        }else{
+            JOptionPane.showMessageDialog(null,"Lectura inexistente");
+        }
+        consumo -= consumo_anterior;
+        return consumo;
+    }
     public void cargarDatos(ArrayList datos) {
         if(datos.size()>1){
             int numero_factura = obtener_num_fac();
@@ -101,6 +198,24 @@ public class generarFactura extends javax.swing.JDialog {
             textoDireccion.setText(obtener_nom_calle(registro[2])+" "+obtener_nom_calle(registro[3])+" "+obtener_nom_calle(registro[4]));
             entradaNFactura.setText(Integer.toString(numero_factura));
             entradaTelefono.setText(registro[9]);
+            //CARGAR LECTURAS NO PAGADAS.
+            conexión prueba = new conexión();
+            try {
+                try {
+                    prueba.conectar();
+                    ArrayList a = prueba.impresion("select LECTURA.NUM_LECTURA from LECTURA\n" +
+                                                "where COD_MEDIDOR = '"+registro[0]+"' " +
+                                                "minus\n" +
+                                                "(select LEC_FACT_PAGADA.NUM_LECTURA \n" +
+                                                "from LEC_FACT_PAGADA\n" +
+                                                "where COD_MEDIDOR = '"+registro[0]+"')");
+                    cargarTabla2(a,registro[1]);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(conexión.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } catch (SQLException sqlExepcion) {
+                System.out.println(sqlExepcion);
+            }
         }else{
             JOptionPane.showMessageDialog(null,"No existe el medidor indicado");
         }
@@ -155,15 +270,20 @@ public class generarFactura extends javax.swing.JDialog {
 
         tablaServicio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {},
-                {},
-                {},
-                {}
+
             },
             new String [] {
-
+                "Lectura", "Consumo", "Valor ($)", "Pagar"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tablaServicio);
 
         botonEmitir.setText("Emitir");
@@ -314,6 +434,8 @@ public class generarFactura extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonEmitirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEmitirActionPerformed
+        //REVISAR SI ES QUE HA SELECCIONADO ITEMS A PAGAR
+        
         conexión prueba = new conexión();
         try {
             try {
