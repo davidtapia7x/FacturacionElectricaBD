@@ -13,6 +13,27 @@ public class conexión{
 	private ResultSet impresionR;
 	private ResultSetMetaData metaData;
 	
+        //PARA LAS ELIMINIACIONES Y LOS INSERTS la variable modif se pasa con el sql
+//String modif = "delete from sistema.alumnos where AL_CODIGO=11";
+//String modif = "insert into sistema.alumnos (AL_CODIGO,AL_APELLIDOS, AL_NOMBRES) VALUES (11,'MESSI','LEONEL')";
+public void modificar(String modif) throws SQLException{
+
+	System.out.println("Despues de la eliminacion con codigo 11");	
+		System.out.println("---------------------------------------");
+		
+		sentencia = conexion.createStatement();
+		sentencia.execute(modif);
+		
+		
+		
+		System.out.println("Creacion con codigo 11");	
+		System.out.println("----------------------");
+		
+		sentencia = conexion.createStatement();
+		sentencia.executeUpdate(modif);
+		
+}
+        
 	public void conectar() throws SQLException, ClassNotFoundException{
 		conexion = null;
 		Class.forName ("oracle.jdbc.driver.OracleDriver");

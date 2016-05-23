@@ -92,12 +92,27 @@ public class interfazPrincipal extends javax.swing.JFrame {
         menuFacturaInst.setText("Instalacion");
 
         item_ConsultaFacInst.setText("Consultas");
+        item_ConsultaFacInst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                item_ConsultaFacInstActionPerformed(evt);
+            }
+        });
         menuFacturaInst.add(item_ConsultaFacInst);
 
         item_GenerarFacturaInst.setText("Generar Factura");
+        item_GenerarFacturaInst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                item_GenerarFacturaInstActionPerformed(evt);
+            }
+        });
         menuFacturaInst.add(item_GenerarFacturaInst);
 
         itemMantenimientoFactInst.setText("Mantenimiento");
+        itemMantenimientoFactInst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemMantenimientoFactInstActionPerformed(evt);
+            }
+        });
         menuFacturaInst.add(itemMantenimientoFactInst);
 
         menuFactura.add(menuFacturaInst);
@@ -202,6 +217,19 @@ public class interfazPrincipal extends javax.swing.JFrame {
     private void itemCRUDLecturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCRUDLecturaActionPerformed
        
     }//GEN-LAST:event_itemCRUDLecturaActionPerformed
+
+    private void item_GenerarFacturaInstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_GenerarFacturaInstActionPerformed
+        generarFacturaInstalacion nueva = new generarFacturaInstalacion(this,true);
+        nueva.setVisible(true);
+    }//GEN-LAST:event_item_GenerarFacturaInstActionPerformed
+
+    private void item_ConsultaFacInstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_ConsultaFacInstActionPerformed
+       
+    }//GEN-LAST:event_item_ConsultaFacInstActionPerformed
+
+    private void itemMantenimientoFactInstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMantenimientoFactInstActionPerformed
+       
+    }//GEN-LAST:event_itemMantenimientoFactInstActionPerformed
 
     /**
      * @param args the command line arguments

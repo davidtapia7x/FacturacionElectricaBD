@@ -51,16 +51,25 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Consultas"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="item_ConsultaFacInstActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="item_GenerarFacturaInst">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Generar Factura"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="item_GenerarFacturaInstActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="itemMantenimientoFactInst">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Mantenimiento"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemMantenimientoFactInstActionPerformed"/>
+                  </Events>
                 </MenuItem>
               </SubComponents>
             </Menu>
