@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -11,7 +13,6 @@ import javax.swing.table.DefaultTableModel;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author David
@@ -24,7 +25,9 @@ public class interfazConsultaFactServ extends javax.swing.JDialog {
     public interfazConsultaFactServ(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
     }
+
     public void cargarTabla2(ArrayList datos) {
 
         String[] titulos = (String[]) datos.get(0);
@@ -36,6 +39,7 @@ public class interfazConsultaFactServ extends javax.swing.JDialog {
         }
         tablaFacturas.setModel(modelo);  //Nombre de la tabla    
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -60,7 +64,7 @@ public class interfazConsultaFactServ extends javax.swing.JDialog {
 
         campoIngreso.setColumns(13);
 
-        opcionConsulta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CODIGO MEDIDOR", "CODIGO FACTURA" }));
+        opcionConsulta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CODIGO MEDIDOR" }));
         opcionConsulta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 opcionConsultaActionPerformed(evt);
@@ -141,25 +145,43 @@ public class interfazConsultaFactServ extends javax.swing.JDialog {
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
         int opcion = opcionConsulta.getSelectedIndex();
-        if(opcion ==0){//Codigo de medidor
+        conexión prueba = new conexión();
+        if (opcion == 0) {//Codigo de medidor
             //CONSULTA
-            conexión prueba = new conexión();
+
             try {
                 try {
                     prueba.conectar();
-                    
+
                     /*CONSULTA
                     System.out.println("select FACTURA_SERVICIO.NUM_FAC_SERV as \"Numero Factura\",FACTURA_SERVICIO.FECHA_PAGO from FACTURA_SERVICIO,LEC_FACT_PAGADA " +
 "where FACTURA_SERVICIO.NUM_FAC_SERV = LEC_FACT_PAGADA.NUM_FAC_SERV " +
 "and LEC_FACT_PAGADA.COD_MEDIDOR ="+"'"+campoIngreso.getText()+"'");*/
-                    
-                    
-                    ArrayList a = prueba.impresion("select FACTURA_SERVICIO.NUM_FAC_SERV as \"Numero Factura\",FACTURA_SERVICIO.FECHA_PAGO from FACTURA_SERVICIO,LEC_FACT_PAGADA " +
-"where FACTURA_SERVICIO.NUM_FAC_SERV = LEC_FACT_PAGADA.NUM_FAC_SERV " +
-"and LEC_FACT_PAGADA.COD_MEDIDOR ="+"'"+campoIngreso.getText()+"'");
-                    
-                    
+                    ArrayList a = prueba.impresion("select FACTURA_SERVICIO.NUM_FAC_SERV as \"Numero Factura\",FACTURA_SERVICIO.FECHA_PAGO from FACTURA_SERVICIO,LEC_FACT_PAGADA "
+                            + "where FACTURA_SERVICIO.NUM_FAC_SERV = LEC_FACT_PAGADA.NUM_FAC_SERV "
+                            + "and LEC_FACT_PAGADA.COD_MEDIDOR =" + "'" + campoIngreso.getText() + "'");
+
                     cargarTabla2(a);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(conexión.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } catch (SQLException sqlExepcion) {
+                System.out.println(sqlExepcion);
+            }
+        } else if (opcion == 1) {
+            try {
+                try {
+                    prueba.conectar();
+                    ArrayList a = prueba.impresion("select LEC_FACT_PAGADA.NUM_FAC_SERV FROM LEC_FACT_PAGADA WHERE LEC_FACT_PAGADA.NUM_FAC_SERV=" + campoIngreso.getText());
+                    if(a.size() >1){
+                        //consultarFactura consFacServ = new consultarFactura((JFrame) getContentPane().getParent(),true);
+                        //consFacServ.setVisible(true);
+                    }else{
+                 
+                        JOptionPane.showMessageDialog(null,"No existe dicha factura!");
+                        campoIngreso.setText("");
+                        campoIngreso.requestFocus();
+                    }
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(conexión.class.getName()).log(Level.SEVERE, null, ex);
                 }

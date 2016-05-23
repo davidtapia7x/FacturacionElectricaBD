@@ -68,7 +68,7 @@ public class generarFacturaInstalacion extends javax.swing.JDialog {
     }
    
     public void cargarTabla2(ArrayList datos,String desc_uso) {
-        float tarifa = obtener_tarifa(desc_uso);
+        /*float tarifa = obtener_tarifa(desc_uso);
         tarifa = Math.round(tarifa*(float)100.0)/(float)100.0;
         //String[] titulos = {"Lectura","Consumo","Valor ($)","Pagar"};
         DefaultTableModel modelo = (DefaultTableModel)tablaServicio.getModel();//new DefaultTableModel(null, titulos);
@@ -87,7 +87,7 @@ public class generarFacturaInstalacion extends javax.swing.JDialog {
             registro[3] = (boolean) false;
             modelo.addRow(registro);
         }
-        tablaServicio.setModel(modelo);  //Nombre de la tabla    
+        tablaServicio.setModel(modelo);  //Nombre de la tabla    */
     }
     private String obtener_nom_calle(String cod){
         String nombre="";
