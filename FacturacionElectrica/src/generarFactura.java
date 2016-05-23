@@ -27,8 +27,22 @@ public class generarFactura extends javax.swing.JDialog {
     public generarFactura(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        entradaCodigo.requestFocus();
     }
-    
+    private void limpiar_datos(){
+        textoDireccion.setText("");
+        DefaultTableModel modelo = (DefaultTableModel)tablaServicio.getModel();//new DefaultTableModel(null, titulos);
+        modelo.setRowCount(0);
+        tablaServicio.setModel(modelo);
+        entradaCedula.setText("");
+        entradaCodigo.setText("");
+        entradaFecha.setText("");
+        entradaNFactura.setText("");
+        entradaNombre.setText("");
+        entradaTarifa.setText("");
+        entradaTelefono.setText("");
+        entradaCodigo.requestFocus();
+    }
     ///ESTOS DEBERIAN IR EN CLASE DE CONEXION?
     private int obtener_num_fac(){
         int valor=1;
@@ -76,7 +90,6 @@ public class generarFactura extends javax.swing.JDialog {
         
         return valor;
     }
-    
     public void cargarTabla2(ArrayList datos,String desc_uso) {
         float tarifa = obtener_tarifa(desc_uso);
         tarifa = Math.round(tarifa*(float)100.0)/(float)100.0;
@@ -209,7 +222,12 @@ public class generarFactura extends javax.swing.JDialog {
                                                 "(select LEC_FACT_PAGADA.NUM_LECTURA \n" +
                                                 "from LEC_FACT_PAGADA\n" +
                                                 "where COD_MEDIDOR = '"+registro[0]+"')");
-                    cargarTabla2(a,registro[1]);
+                    if(a.size()>1){
+                        cargarTabla2(a,registro[1]);
+                    }else{
+                        JOptionPane.showMessageDialog(null,"No existen lecturas aun!");
+                        limpiar_datos();
+                    }
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(conexión.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -218,6 +236,7 @@ public class generarFactura extends javax.swing.JDialog {
             }
         }else{
             JOptionPane.showMessageDialog(null,"No existe el medidor indicado");
+            limpiar_datos();
         }
         
     }
@@ -327,7 +346,13 @@ public class generarFactura extends javax.swing.JDialog {
 
         jLabel1.setText("Total:");
 
+        jTextField1.setEditable(false);
         jTextField1.setColumns(9);
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -477,24 +502,8 @@ public class generarFactura extends javax.swing.JDialog {
 "and	 \"PREDIO\".\"CIDENTIDAD\"=\"PROPIETARIO\".\"IDENT\" " +
 "and	 \"PREDIO\".\"CDUSO\"=\"USOS\".\"CODUSOS\" " +
 "and 	 \"MEDIDOR\".\"COD_MEDIDOR\" = "+"'"+entradaCodigo.getText()+"'");
-                System.out.println("select \"MEDIDOR\".\"COD_MEDIDOR\" as \"Codigo Medidor\", " +
-"	 \"USOS\".\"DESCRIPCIONUSO\" as \"DESCRIPCIONUSO\", " +
-"	 \"PREDIO\".\"CALLE1\" as \"CALLE1\", " +
-"	 \"PREDIO\".\"CALLE2\" as \"CALLE2\", " +
-"	 \"PREDIO\".\"CALLE3\" as \"CALLE3\", " +
-"	 \"PREDIO\".\"CIDENTIDAD\" as \"CIDENTIDAD\", " +
-"	 \"PROPIETARIO\".\"NOMBRE1\" as \"NOMBRE1\", " +
-"	 \"PROPIETARIO\".\"APELLIDO1\" as \"APELLIDO1\", " +
-"	 \"PROPIETARIO\".\"APELLIDO2\" as \"APELLIDO2\", " +
-"	 \"PROPIETARIO\".\"TELEFONO\" as \"TELEFONO\"  " +
-" from	 \"USOS\", " +
-"	 \"PROPIETARIO\", " +
-"	 \"PREDIO\", " +
-"	 \"MEDIDOR\" " +
-"where   \"MEDIDOR\".\"CLAVECATASTRAL\"=\"PREDIO\".\"CLAVECATASTRAL\" " +
-"and	 \"PREDIO\".\"CIDENTIDAD\"=\"PROPIETARIO\".\"IDENT\" " +
-"and	 \"PREDIO\".\"CDUSO\"=\"USOS\".\"CODUSOS\" " +
-"and 	 \"MEDIDOR\".\"COD_MEDIDOR\" = "+"'"+entradaCodigo.getText()+"'");
+     
+                
                 cargarDatos(a);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(conexión.class.getName()).log(Level.SEVERE, null, ex);
@@ -503,6 +512,10 @@ public class generarFactura extends javax.swing.JDialog {
             System.out.println(sqlExepcion);
         }
     }//GEN-LAST:event_entradaCodigoActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
