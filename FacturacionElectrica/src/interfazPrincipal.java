@@ -1,5 +1,6 @@
 
 import javax.swing.JOptionPane;
+import masterDetail.parametros;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -47,7 +48,14 @@ public class interfazPrincipal extends javax.swing.JFrame {
         menuParametro = new javax.swing.JMenu();
         menuConsultaParametro = new javax.swing.JMenu();
         itemCRUDParametro = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         menuAcercaDe = new javax.swing.JMenu();
+        itemAyudaAcercaDe = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -102,6 +110,11 @@ public class interfazPrincipal extends javax.swing.JFrame {
         menuLectura.add(menuConsultaLectura);
 
         itemCRUDLectura.setText("CRUD");
+        itemCRUDLectura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemCRUDLecturaActionPerformed(evt);
+            }
+        });
         menuLectura.add(itemCRUDLectura);
 
         barraMenu.add(menuLectura);
@@ -112,11 +125,44 @@ public class interfazPrincipal extends javax.swing.JFrame {
         menuParametro.add(menuConsultaParametro);
 
         itemCRUDParametro.setText("CRUD");
+        itemCRUDParametro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemCRUDParametroActionPerformed(evt);
+            }
+        });
         menuParametro.add(itemCRUDParametro);
 
         barraMenu.add(menuParametro);
 
+        jMenu1.setText("Otros");
+
+        jMenuItem2.setText("Medidor CRUD");
+        jMenu1.add(jMenuItem2);
+
+        jMenuItem3.setText("Calles CRUD");
+        jMenu1.add(jMenuItem3);
+
+        jMenuItem4.setText("Predio CRUD");
+        jMenu1.add(jMenuItem4);
+
+        jMenuItem6.setText("Rubro CRUD");
+        jMenu1.add(jMenuItem6);
+
+        jMenuItem5.setText("Propietario CRUD");
+        jMenu1.add(jMenuItem5);
+
+        barraMenu.add(jMenu1);
+
         menuAcercaDe.setText("Acerca de");
+
+        itemAyudaAcercaDe.setText("Ayuda");
+        itemAyudaAcercaDe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemAyudaAcercaDeActionPerformed(evt);
+            }
+        });
+        menuAcercaDe.add(itemAyudaAcercaDe);
+
         barraMenu.add(menuAcercaDe);
 
         setJMenuBar(barraMenu);
@@ -144,6 +190,18 @@ public class interfazPrincipal extends javax.swing.JFrame {
         interfazConsultaFactServ consulta = new interfazConsultaFactServ(this,true);
         consulta.setVisible(true);
     }//GEN-LAST:event_item_ConsultaFacServActionPerformed
+
+    private void itemCRUDParametroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCRUDParametroActionPerformed
+        parametros.main(new String[0]);
+    }//GEN-LAST:event_itemCRUDParametroActionPerformed
+
+    private void itemAyudaAcercaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAyudaAcercaDeActionPerformed
+        JOptionPane.showMessageDialog(null,"David Tapia, Andres C. 2016\nSistema de Facturacion Electrica\nB.D. 5to A");
+    }//GEN-LAST:event_itemAyudaAcercaDeActionPerformed
+
+    private void itemCRUDLecturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCRUDLecturaActionPerformed
+       
+    }//GEN-LAST:event_itemCRUDLecturaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -182,6 +240,7 @@ public class interfazPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar barraMenu;
+    private javax.swing.JMenuItem itemAyudaAcercaDe;
     private javax.swing.JMenuItem itemCRUDLectura;
     private javax.swing.JMenuItem itemCRUDParametro;
     private javax.swing.JMenuItem itemMantenimientoFactInst;
@@ -190,7 +249,13 @@ public class interfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem item_ConsultaFacServ;
     private javax.swing.JMenuItem item_GenerarFacturaInst;
     private javax.swing.JMenuItem item_GenerarFacturaServ;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JLabel logoCentroSur;
     private javax.swing.JMenu menuAcercaDe;
     private javax.swing.JMenu menuConsultaLectura;
